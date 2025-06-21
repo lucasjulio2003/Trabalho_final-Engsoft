@@ -13,9 +13,12 @@ public class ExemplarLivro {
 
     private Emprestimo emprestimo;
 
-    public ExemplarLivro(String codigo) {
+    private Livro livro;
+
+    public ExemplarLivro(String codigo, Livro livro) {
         this.codigo = codigo;
         this.status = Status.DISPONIVEL;
+        this.livro = livro;
     }
 
     public String getCodigo() {
@@ -42,6 +45,13 @@ public class ExemplarLivro {
         this.emprestimo = emprestimo;
     }
 
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
+    }
     
     
 }
