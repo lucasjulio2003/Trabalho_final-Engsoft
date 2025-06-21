@@ -1,5 +1,8 @@
+package Usuario;
 import java.util.ArrayList;
 import java.util.List;
+
+import Emprestimo.Emprestimo;
 
 public abstract class Usuario {
     private String id;
