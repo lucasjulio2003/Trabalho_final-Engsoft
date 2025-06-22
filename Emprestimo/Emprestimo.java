@@ -18,5 +18,45 @@ public class Emprestimo {
         this.exemplarLivro = exemplarLivro;
     }
 
+    public String getTituloLivro() {
+        return tituloLivro;
+    }
+
+    public void setTituloLivro(String tituloLivro) {
+        this.tituloLivro = tituloLivro;
+    }
+
+    public Date getDataEmprestimo() {
+        return dataEmprestimo;
+    }
+
+    public void setDataEmprestimo(Date dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(String dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    public ExemplarLivro getExemplarLivro() {
+        return exemplarLivro;
+    }
+
+    public void setExemplarLivro(ExemplarLivro exemplarLivro) {
+        this.exemplarLivro = exemplarLivro;
+    }
+
  
 }
