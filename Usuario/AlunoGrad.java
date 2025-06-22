@@ -1,5 +1,6 @@
 package Usuario;
 
+import Emprestimo.RegraEmprestimoAlunoGraduacao;
 import Livro.Livro;
 
 public class AlunoGrad extends Usuario{

@@ -1,5 +1,7 @@
 package Usuario;
 
+import Emprestimo.RegraEmprestimoAlunoGraduacao;
+
 public class AlunoPosGrad extends Usuario{
     public static final int LIMITE_EMPRESTIMO = 2;
     public static final int PRAZO_DIAS = 1;
@@ -9,5 +11,6 @@ public class AlunoPosGrad extends Usuario{
         super(id,nome);
         this.regraEmprestimo = new RegraEmprestimoAlunoGraduacao();
     }
+
     
 }

@@ -1,22 +1,28 @@
-package Usuario;
+package Emprestimo;
 
 import Livro.Livro;
+import Usuario.Usuario;
 
 public class RegraEmprestimoPosGraduacao implements IRegraEmprestimo {
 
     @Override
     public boolean verificarEmprestimo(Usuario usuario, Livro livro) {
-        return null;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'verificarEmprestimo'");
     }
 
     @Override
     public int getPrazoEmprestimoDias() {
-       return null;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPrazoEmprestimoDias'");
     }
 
     @Override
     public int getLimiteEmprestimos() {
-        return null;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getLimiteEmprestimos'");
     }
+    
+
     
 }
