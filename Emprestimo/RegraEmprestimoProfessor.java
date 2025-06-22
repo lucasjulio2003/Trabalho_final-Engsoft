@@ -12,16 +12,5 @@ public class RegraEmprestimoProfessor implements IRegraEmprestimo{
         return false;
     }
 
-    @Override
-    public int getPrazoEmprestimoDias() {
-        return 8; // Professor: 8 dias 
-    }
-
-    @Override
-    public int getLimiteEmprestimos() {
-        // Professores não têm limite para a quantidade de livros [8].
-        // Um valor muito alto ou Integer.MAX_VALUE pode ser usado para representar "sem limite".
-        return Integer.MAX_VALUE;
-    }
 
 }

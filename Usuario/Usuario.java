@@ -6,18 +6,18 @@ import Emprestimo.Emprestimo;
 import Emprestimo.IRegraEmprestimo;
 
 public abstract class Usuario {
-    private String id;
+    private int id;
     private String nome;
     private IRegraEmprestimo regraEmprestimo;
     private List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 
-    public Usuario(String id, String nome, IRegraEmprestimo regraEmprestimo) {
+    public Usuario(int id, String nome, IRegraEmprestimo regraEmprestimo) {
         this.id = id;
         this.nome = nome;
         this.regraEmprestimo = regraEmprestimo;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -25,7 +25,7 @@ public abstract class Usuario {
         return nome;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
