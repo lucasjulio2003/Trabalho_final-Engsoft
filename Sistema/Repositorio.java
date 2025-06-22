@@ -1,5 +1,6 @@
 package Sistema;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Livro.Livro;
@@ -9,15 +10,18 @@ public class Repositorio {
     private List<Usuario> usuarios;
     private List<Livro> livros;
 
-    private Repositorio repositorio;
+    private static Repositorio repositorio;
 
-    private Repositorio(){}
+    private Repositorio(){
+        this.usuarios = new ArrayList<Usuario>();
+        this.livros = new ArrayList<Livro>();
+    }
     
-    public Repositorio getRepositorio(){
-        if (this.repositorio == null){
+    public static Repositorio getRepositorio(){
+        if (repositorio == null){
             return new Repositorio();
         } else{
-            return this.repositorio;
+            return repositorio;
         }
     }
 
@@ -39,6 +43,14 @@ public class Repositorio {
         }
 
         return null;
+    }
+
+    public void addUsuario(Usuario usuario){
+        this.usuarios.add(usuario);
+    }
+
+    public void addLivro(Livro livro){
+        this.livros.add(livro);
     }
 
 
