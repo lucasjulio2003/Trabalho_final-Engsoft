@@ -1,15 +1,13 @@
 package Usuario;
 
-import Emprestimo.RegraEmprestimoAlunoGraduacao;
+import Emprestimo.IRegraEmprestimo;
 
 public class AlunoPosGrad extends Usuario{
     public static final int LIMITE_EMPRESTIMO = 3;
     public static final int PRAZO_DIAS = 5;
-    private RegraEmprestimoAlunoGraduacao regraEmprestimo;
     
-    public AlunoPosGrad(String id, String nome){
-        super(id,nome);
-        this.regraEmprestimo = new RegraEmprestimoAlunoGraduacao();
+    public AlunoPosGrad(String id, String nome, IRegraEmprestimo regraEmprestimo){
+        super(id,nome, regraEmprestimo);
     }
 
     public static int getLimiteEmprestimo() {
@@ -19,14 +17,5 @@ public class AlunoPosGrad extends Usuario{
     public static int getPrazoDias() {
         return PRAZO_DIAS;
     }
-
-    public RegraEmprestimoAlunoGraduacao getRegraEmprestimo() {
-        return regraEmprestimo;
-    }
-
-    public void setRegraEmprestimo(RegraEmprestimoAlunoGraduacao regraEmprestimo) {
-        this.regraEmprestimo = regraEmprestimo;
-    }
-
     
 }

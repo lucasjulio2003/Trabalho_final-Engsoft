@@ -5,6 +5,9 @@ import Usuario.Usuario;
 
 public class RegraEmprestimoPosGraduacao implements IRegraEmprestimo {
 
+    public static final int LIMITE_EMPRESTIMO = 3;
+    public static final int PRAZO_DIAS = 5;
+
     @Override
     public boolean verificarEmprestimo(Usuario usuario, Livro livro) {
         // TODO Auto-generated method stub

@@ -4,6 +4,7 @@ import Livro.Livro;
 import Usuario.Usuario;
 
 public class RegraEmprestimoProfessor implements IRegraEmprestimo{
+    public static final int PRAZO_DIAS = 8;
 
     @Override
     public boolean verificarEmprestimo(Usuario usuario, Livro livro) {

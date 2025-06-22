@@ -4,6 +4,8 @@ import Livro.Livro;
 import Usuario.Usuario;
 
 public class RegraEmprestimoAlunoGraduacao implements IRegraEmprestimo{
+  public static final int LIMITE_EMPRESTIMO = 2;
+  public static final int PRAZO_DIAS = 4;
 
   @Override
   public int getPrazoEmprestimoDias() {

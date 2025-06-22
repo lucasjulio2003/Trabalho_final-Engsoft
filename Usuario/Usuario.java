@@ -3,15 +3,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Emprestimo.Emprestimo;
+import Emprestimo.IRegraEmprestimo;
 
 public abstract class Usuario {
     private String id;
     private String nome;
+    private IRegraEmprestimo regraEmprestimo;
     private List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 
-    public Usuario(String id, String nome) {
+    public Usuario(String id, String nome, IRegraEmprestimo regraEmprestimo) {
         this.id = id;
         this.nome = nome;
+        this.regraEmprestimo = regraEmprestimo;
     }
 
     public String getId() {
@@ -37,6 +40,11 @@ public abstract class Usuario {
     public List<Emprestimo> getEmprestimos() {
         return emprestimos;
     }
+
+    public void setRegraEmprestimo(IRegraEmprestimo regraEmprestimo) {
+        this.regraEmprestimo = regraEmprestimo;
+    }
+    
 }
 
 

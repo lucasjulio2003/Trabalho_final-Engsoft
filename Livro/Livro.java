@@ -1,6 +1,8 @@
 package Livro;
 import java.util.List;
 
+import Emprestimo.Reserva;
+
 public class Livro {
     private int codigo;
     private String titulo;
@@ -11,7 +13,22 @@ public class Livro {
 
     private List<ExemplarLivro> exemplares;
 
-
+    private List<Reserva> reservas;
+    
+    public Livro(int codigo, String titulo, String editora, List<String> autores, String edicao, String anoPublicacao) {
+        this.codigo = codigo;
+        this.titulo = titulo;
+        this.editora = editora;
+        this.autores = autores;
+        this.edicao = edicao;
+        this.anoPublicacao = anoPublicacao;
+    }
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
     public int getCodigo() {
         return codigo;
     }
