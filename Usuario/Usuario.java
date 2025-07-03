@@ -8,13 +8,12 @@ import Emprestimo.IRegraEmprestimo;
 public abstract class Usuario {
     private int id;
     private String nome;
-    private IRegraEmprestimo regraEmprestimo;
+    protected IRegraEmprestimo regraEmprestimo;
     private List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 
-    public Usuario(int id, String nome, IRegraEmprestimo regraEmprestimo) {
+    public Usuario(int id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.regraEmprestimo = regraEmprestimo;
     }
 
     public int getId() {
@@ -39,10 +38,6 @@ public abstract class Usuario {
 
     public List<Emprestimo> getEmprestimos() {
         return emprestimos;
-    }
-
-    public void setRegraEmprestimo(IRegraEmprestimo regraEmprestimo) {
-        this.regraEmprestimo = regraEmprestimo;
     }
     
 }

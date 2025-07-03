@@ -1,15 +1,14 @@
 package Usuario;
 
-import Emprestimo.IRegraEmprestimo;
+import Emprestimo.RegraEmprestimoProfessor;
 
-//essa implementacao da interface observador ainda n é certa, é só pra ter uma opção de caminho
 public class Professor extends Usuario  {
     
     public static final int PRAZO_DIAS = 8;
     
-    public Professor(int id, String nome, IRegraEmprestimo regraEmprestimo) {
-        super(id, nome, regraEmprestimo);
-
+    public Professor(int id, String nome) {
+        super(id, nome);
+        this.regraEmprestimo = new RegraEmprestimoProfessor();
     }
 
 }
