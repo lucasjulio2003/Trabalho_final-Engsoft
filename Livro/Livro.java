@@ -23,6 +23,13 @@ public class Livro {
         this.edicao = edicao;
         this.anoPublicacao = anoPublicacao;
     }
+
+    public boolean temExemplarDisponivel(){
+        if(exemplares.isEmpty())
+            return false;
+        return true;
+    }
+
     public List<Reserva> getReservas() {
         return reservas;
     }
