@@ -1,6 +1,6 @@
 package Usuario;
 
-import Emprestimo.RegraEmprestimoAlunoGraduacao;
+import Emprestimo.RegraEmprestimoAluno;
 
 public class AlunoGrad extends Usuario{
     public static final int LIMITE_EMPRESTIMO = 2;
