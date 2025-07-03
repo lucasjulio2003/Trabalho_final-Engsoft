@@ -8,12 +8,22 @@ import Emprestimo.IRegraEmprestimo;
 public abstract class Usuario {
     private int id;
     private String nome;
+    private boolean isDevedor;
+    
     protected IRegraEmprestimo regraEmprestimo;
     private List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-
+    
     public Usuario(int id, String nome) {
         this.id = id;
         this.nome = nome;
+    }
+    
+    public boolean isDevedor() {
+        return isDevedor;
+    }
+
+    public void setDevedor(boolean isDevedor) {
+        this.isDevedor = isDevedor;
     }
 
     public int getId() {

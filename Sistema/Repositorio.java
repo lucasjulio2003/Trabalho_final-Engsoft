@@ -45,13 +45,4 @@ public class Repositorio {
         return null;
     }
 
-    public void addUsuario(Usuario usuario){
-        this.usuarios.add(usuario);
-    }
-
-    public void addLivro(Livro livro){
-        this.livros.add(livro);
-    }
-
-
 }
