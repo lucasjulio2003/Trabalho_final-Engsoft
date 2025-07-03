@@ -17,6 +17,7 @@ public abstract class Usuario {
         this.id = id;
         this.nome = nome;
     }
+    public abstract int getLimiteEmprestimos();
     
     public boolean isDevedor() {
         return isDevedor;

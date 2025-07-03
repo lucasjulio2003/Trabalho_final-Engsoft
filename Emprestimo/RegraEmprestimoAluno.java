@@ -3,38 +3,36 @@ package Emprestimo;
 import java.util.List;
 
 import Livro.Livro;
+import Sistema.Repositorio;
 import Usuario.Usuario;
 
 public class RegraEmprestimoAluno implements IRegraEmprestimo{
 
 
+
   @Override
-    public boolean verificarEmprestimo(Usuario id, Livro codigo) {
+    public boolean verificarEmprestimo(Usuario usuario, Livro livro) {
+
       // A Regra 1 se aplica a Alunos de Graduação e Pós-Graduação.
         // O objeto 'usuario' aqui pode ser um AlunoGraduacao ou AlunoPosGraduacao.
         // As regras de limite virão do próprio objeto usuario (polimorfismo).
 
-        // 1. Houver exemplares disponíveis na biblioteca (Seção 3.1.1, Regra 1, Item 1)
         if (!livro.temExemplarDisponivel()) {
-            return ResultadoVerificacao.falha("Não foi possível realizar o empréstimo: Não há exemplares disponíveis para o livro " + livro.getTitulo() + ".");
+            return GerenciadorMensagem.falha("Não foi possível realizar o empréstimo: Não há exemplares disponíveis para o livro " + livro.getTitulo() + ".");
         }
 
-        // 2. O usuário não estiver “devedor” com livros em atraso (Seção 3.1.1, Regra 1, Item 2)
         if (usuario.isDevedor()) { // Assumindo que Usuario tem um método isDevedor()
-            return ResultadoVerificacao.falha("Não foi possível realizar o empréstimo: O usuário " + usuario.getNome() + " possui livros em atraso.");
+            return GerenciadorMensagem.falha("Não foi possível realizar o empréstimo: O usuário " + usuario.getNome() + " possui livros em atraso.");
         }
 
-        // 3. O usuário seguir as regras específicas referentes à quantidade máxima de livros que podem ser emprestados (Tabela 2)
-        // O limite é específico do tipo de aluno (graduação ou pós-graduação).
-        // Assumindo que `usuario.getEmprestimosCorrentes()` retorna a lista de empréstimos ativos do usuário.
-        if (usuario.getEmprestimos().size() >= usuario.getLimiteEmprestimosEmAberto()) {
-            return ResultadoVerificacao.falha("Não foi possível realizar o empréstimo: O usuário " + usuario.getNome() + " atingiu o limite máximo de livros (" + usuario.getLimiteEmprestimosEmAberto() + ") emprestados simultaneamente.");
+      
+        if (usuario.getEmprestimos().size() >= usuario.getLimiteEmprestimos()) {
+            return GerenciadorMensagem.falha("Não foi possível realizar o empréstimo: O usuário " + usuario.getNome() + " atingiu o limite máximo de livros (" + usuario.getLimiteEmprestimosEmAberto() + ") emprestados simultaneamente.");
         }
 
-        // 4. O usuário não pode ter nenhum empréstimo em andamento de um exemplar desse mesmo livro.
         for (RegistroEmprestimo emprestimo : usuario.getEmprestimosCorrentes()) {
             if (emprestimo.getLivro().equals(livro)) { // Assumindo que RegistroEmprestimo pode obter o Livro
-                return ResultadoVerificacao.falha("Não foi possível realizar o empréstimo: O usuário " + usuario.getNome() + " já possui um exemplar do livro " + livro.getTitulo() + " emprestado.");
+                return GerenciadorMensagem.falha("Não foi possível realizar o empréstimo: O usuário " + usuario.getNome() + " já possui um exemplar do livro " + livro.getTitulo() + " emprestado.");
             }
         }
 
