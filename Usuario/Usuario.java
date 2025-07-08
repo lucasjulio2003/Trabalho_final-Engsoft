@@ -25,7 +25,11 @@ public abstract class Usuario {
 
         if(this.regraEmprestimo.verificarEmprestimo(this, livro)){
             // faz emprestimo
+            System.out.println("Fazendo emprestimo");
+            return;
         }
+
+        System.out.println("Emprestimo negado");
     }
 
     public IRegraEmprestimo getRegraEmprestimo(){

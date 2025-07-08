@@ -8,6 +8,9 @@ public class ComandoEmprestar implements Comando {
 
     @Override
     public void executar(CarregadorParametros carregadorParametros) {
+
+        System.out.println("Executando emprestimo");
+
         String idUsuario = carregadorParametros.getParametroUm();
         String idLivro = carregadorParametros.getParametroDois();
 
