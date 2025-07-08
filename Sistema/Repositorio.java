@@ -25,7 +25,7 @@ public class Repositorio {
         }
     }
 
-    public Usuario buscarUsuarioPorCodigo(int codigo){
+    public Usuario buscarUsuarioPorCodigo(String codigo){
         for (Usuario usuario: this.usuarios){
             if (usuario.getId() == codigo){
                 return usuario;
@@ -35,7 +35,7 @@ public class Repositorio {
         return null;
     }
 
-    public Livro buscarLivroPorCodigo(int codigo){
+    public Livro buscarLivroPorCodigo(String codigo){
         for (Livro livro: this.livros){
             if (livro.getCodigo() == codigo){
                 return livro;

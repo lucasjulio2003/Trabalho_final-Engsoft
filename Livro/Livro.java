@@ -4,7 +4,7 @@ import java.util.List;
 import Emprestimo.Reserva;
 
 public class Livro {
-    private int codigo;
+    private String codigo;
     private String titulo;
     private String editora;
     private List<String> autores;
@@ -15,7 +15,7 @@ public class Livro {
 
     private List<Reserva> reservas;
     
-    public Livro(int codigo, String titulo, String editora, List<String> autores, String edicao, String anoPublicacao) {
+    public Livro(String codigo, String titulo, String editora, List<String> autores, String edicao, String anoPublicacao) {
         this.codigo = codigo;
         this.titulo = titulo;
         this.editora = editora;
@@ -36,10 +36,10 @@ public class Livro {
     public void setReservas(List<Reserva> reservas) {
         this.reservas = reservas;
     }
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
     public String getTitulo() {

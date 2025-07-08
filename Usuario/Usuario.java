@@ -4,20 +4,33 @@ import java.util.List;
 
 import Emprestimo.Emprestimo;
 import Emprestimo.IRegraEmprestimo;
+import Livro.Livro;
 
 public abstract class Usuario {
-    private int id;
+    private String id;
     private String nome;
     private boolean isDevedor;
     
     protected IRegraEmprestimo regraEmprestimo;
     private List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
     
-    public Usuario(int id, String nome) {
+    public Usuario(String id, String nome) {
         this.id = id;
         this.nome = nome;
     }
+
     public abstract int getLimiteEmprestimos();
+
+    public void realizarEmprestimo(Livro livro){
+
+        if(this.regraEmprestimo.verificarEmprestimo(this, livro)){
+            // faz emprestimo
+        }
+    }
+
+    public IRegraEmprestimo getRegraEmprestimo(){
+        return this.regraEmprestimo;
+    }
     
     public boolean isDevedor() {
         return isDevedor;
@@ -27,7 +40,7 @@ public abstract class Usuario {
         this.isDevedor = isDevedor;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -35,7 +48,7 @@ public abstract class Usuario {
         return nome;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

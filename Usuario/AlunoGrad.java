@@ -6,7 +6,7 @@ public class AlunoGrad extends Usuario{
     //ublic static final int LIMITE_EMPRESTIMO = 2;
     //public static final int PRAZO_DIAS = 4;
     
-    public AlunoGrad(int id, String nome){
+    public AlunoGrad(String id, String nome){
         super(id,nome);
         this.regraEmprestimo = new RegraEmprestimoAluno();
     }
