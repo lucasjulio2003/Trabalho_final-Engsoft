@@ -1,8 +1,10 @@
 package Emprestimo;
 
+import Livro.ExemplarLivro;
 import java.util.List;
 
 import Livro.Livro;
+import Sistema.GerenciadorMensagem;
 import Sistema.Repositorio;
 import Usuario.Usuario;
 
@@ -13,28 +15,33 @@ public class RegraEmprestimoAluno implements IRegraEmprestimo{
   @Override
     public boolean verificarEmprestimo(Usuario usuario, Livro livro) {
 
-      // A Regra 1 se aplica a Alunos de Graduação e Pós-Graduação.
-        // O objeto 'usuario' aqui pode ser um AlunoGraduacao ou AlunoPosGraduacao.
-        // As regras de limite virão do próprio objeto usuario (polimorfismo).
-
+        // Tem exemplar?
         if (!livro.temExemplarDisponivel()) {
-            return GerenciadorMensagem.falha("Não foi possível realizar o empréstimo: Não há exemplares disponíveis para o livro " + livro.getTitulo() + ".");
+            // return GerenciadorMensagem.falha("Não foi possível realizar o empréstimo: Não há exemplares disponíveis para o livro " + livro.getTitulo() + ".");
+            GerenciadorMensagem.falhaExemplares(livro);
         }
 
+        //Usuario é devedor?
         if (usuario.isDevedor()) { // Assumindo que Usuario tem um método isDevedor()
-            return GerenciadorMensagem.falha("Não foi possível realizar o empréstimo: O usuário " + usuario.getNome() + " possui livros em atraso.");
+            GerenciadorMensagem.falhaDevedor(usuario);
         }
 
-      
-        if (usuario.getEmprestimos().size() >= usuario.getLimiteEmprestimos()) {
-            return GerenciadorMensagem.falha("Não foi possível realizar o empréstimo: O usuário " + usuario.getNome() + " atingiu o limite máximo de livros (" + usuario.getLimiteEmprestimosEmAberto() + ") emprestados simultaneamente.");
-        }
-
-        for (RegistroEmprestimo emprestimo : usuario.getEmprestimosCorrentes()) {
-            if (emprestimo.getLivro().equals(livro)) { // Assumindo que RegistroEmprestimo pode obter o Livro
-                return GerenciadorMensagem.falha("Não foi possível realizar o empréstimo: O usuário " + usuario.getNome() + " já possui um exemplar do livro " + livro.getTitulo() + " emprestado.");
+        //Usuario tem emprestimo ativo do msm livro?
+        String codigoExemplarAtual = exemplar.getCodigo();  
+        for (RegistroEmprestimo emp : usuario.getEmprestimosAtivos()) {
+            // Verifica apenas registros ainda ativos
+            if (emp.isAtivo() 
+            && emp.getExemplar().getCodigo().equals(codigoExemplarAtual)) {
+                GerenciadorMensagem.falhaExemplarEmprestado(usuario, livro);
             }
+    }
+
+        //limite maximo de emprestimos
+        if (usuario.getEmprestimosAtivos().size() >= usuario.getLimiteEmprestimos()) {
+            GerenciadorMensagem.falhaLimiteMax(usuario, limite);
         }
+
+        
 
         // 5. Lógica de reservas (Seção 3.1.1, Regra 1, Itens 4 e 5)
         // Isso é um pouco mais complexo e depende de como as reservas são gerenciadas.

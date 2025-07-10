@@ -1,7 +1,6 @@
 package Emprestimo;
-import java.sql.Date;
 import Livro.ExemplarLivro;
-import Livro.Livro;
+import java.sql.Date;
 
 public class Emprestimo {
     private String tituloLivro;
