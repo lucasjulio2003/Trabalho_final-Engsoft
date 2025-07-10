@@ -27,14 +27,15 @@ public class RegraEmprestimoAluno implements IRegraEmprestimo{
         }
 
         //Usuario tem emprestimo ativo do msm livro?
-        String codigoExemplarAtual = exemplar.getCodigo();  
-        for (RegistroEmprestimo emp : usuario.getEmprestimosAtivos()) {
+        
+        
+        for (Emprestimo emp : usuario.getEmprestimosAtivos()) {
             // Verifica apenas registros ainda ativos
             if (emp.isAtivo() 
             && emp.getExemplar().getCodigo().equals(codigoExemplarAtual)) {
                 GerenciadorMensagem.falhaExemplarEmprestado(usuario, livro);
             }
-    }
+        }
 
         //limite maximo de emprestimos
         if (usuario.getEmprestimosAtivos().size() >= usuario.getLimiteEmprestimos()) {

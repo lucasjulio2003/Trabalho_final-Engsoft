@@ -4,6 +4,7 @@ import java.util.List;
 
 import Emprestimo.Emprestimo;
 import Emprestimo.IRegraEmprestimo;
+
 import Livro.Livro;
 
 public abstract class Usuario {
@@ -12,6 +13,7 @@ public abstract class Usuario {
     private boolean isDevedor;
     
     protected IRegraEmprestimo regraEmprestimo;
+    //private List<RegistroEmprestimo> emprestimosRegistrados = new ArrayList<>();
     private List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
     
     public Usuario(String id, String nome) {
@@ -42,6 +44,7 @@ public abstract class Usuario {
 
     public void setDevedor(boolean isDevedor) {
         this.isDevedor = isDevedor;
+        
     }
 
     public String getId() {
@@ -67,7 +70,15 @@ public abstract class Usuario {
     public List<Emprestimo> getEmprestimos() {
         return emprestimos;
     }
-    
+    public List<Emprestimo> getEmprestimosAtivos() {
+        List<Emprestimo> emprestimosAtivos = new ArrayList<>();
+        for (Emprestimo registro : emprestimos) {
+            if (registro.isAtivo()) {
+                emprestimosAtivos.add(registro);
+            }
+        }
+        return emprestimosAtivos;
+    }
 }
 
 
