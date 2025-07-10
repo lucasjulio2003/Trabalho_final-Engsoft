@@ -8,12 +8,12 @@ public class Emprestimo {
     private String tituloLivro;
     private Date dataEmprestimo;
     private String status;
-    private String dataDevolucao;
+    private Date dataDevolucao;
     private ExemplarLivro exemplarLivro;
     private Date dataDevolucaoReal;
     
 
-    public Emprestimo(String tituloLivro, Date dataEmprestimo, String status, String dataDevolucao, ExemplarLivro exemplarLivro){
+    public Emprestimo(String tituloLivro, Date dataEmprestimo, String status, Date dataDevolucao, ExemplarLivro exemplarLivro){
         this.tituloLivro = tituloLivro;
         this.dataEmprestimo = dataEmprestimo;
         this.status = status;
@@ -46,11 +46,11 @@ public class Emprestimo {
         this.status = status;
     }
 
-    public String getDataDevolucao() {
+    public Date getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(String dataDevolucao) {
+    public void setDataDevolucao(Date dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 
@@ -61,14 +61,7 @@ public class Emprestimo {
     public void setExemplarLivro(ExemplarLivro exemplarLivro) {
         this.exemplarLivro = exemplarLivro;
     }
-     public boolean isAtivo() {
-        // Se já devolveu em data real, não está ativo
-        if (dataDevolucaoReal != null) {
-            return false;
-        }
-        // Se ultrapassou o prazo, consideramos não mais ativo (e sim devedor)
-        return !isDevedor();
-    }
+    
     public void registrarDevolucao() {
         this.dataDevolucaoReal = new Date(System.currentTimeMillis());
     }
@@ -84,7 +77,6 @@ public class Emprestimo {
                ", dataEmprestimo=" + dataEmprestimo +
                ", dataDevolucaoPrevista=" + dataDevolucao +
                ", dataDevolucaoReal=" + (dataDevolucaoReal != null ? dataDevolucaoReal : "PENDENTE") +
-               ", ativo=" + isAtivo() +
                '}';
     }
 }
