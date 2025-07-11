@@ -45,18 +45,15 @@ public class RegraEmprestimoAluno implements IRegraEmprestimo{
         if (qtdReservas < livro.getQuantidadeExemplaresDisponiveis() || temReserva) {
             // pode realizar o emprestimo
         } else {
-            return GerenciadorMensagem.falha(
-            "Não foi possível realizar o empréstimo: " +
-            "Há mais reservas do que exemplares disponíveis e o usuário " +
-            usuario.getNome() +
-            " não possui uma reserva para este livro."
-            );
+            return GerenciadorMensagem.falhaReservasEquantidadesDisponiveis(usuario);
         }
         // 6) O usuário não pode ter nenhum empréstimo em andamento de um exemplar desse mesmo livro
-        
+        if(usuario.temEmprestimoAtivoDe(livro, "Ativo")){
+            return GerenciadorMensagem.falhaExemplarEmprestado(livro, usuario);
+        }
 
 
-        // Se todas as verificações passaram
-        return ResultadoVerificacao.sucesso();
+        // Se passou em todas as etapas, permite o empréstimo
+        return true;
     }
 }
