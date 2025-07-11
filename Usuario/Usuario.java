@@ -15,6 +15,7 @@ public abstract class Usuario {
     protected IRegraEmprestimo regraEmprestimo;
     //private List<RegistroEmprestimo> emprestimosRegistrados = new ArrayList<>();
     private List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
+    private List<Emprestimo> emprestimosAtivos = new ArrayList<Emprestimo>();
     
     public Usuario(String id, String nome) {
         this.id = id;
@@ -71,12 +72,6 @@ public abstract class Usuario {
         return emprestimos;
     }
     public List<Emprestimo> getEmprestimosAtivos() {
-        List<Emprestimo> emprestimosAtivos = new ArrayList<>();
-        for (Emprestimo registro : emprestimos) {
-            if (registro.isAtivo()) {
-                emprestimosAtivos.add(registro);
-            }
-        }
         return emprestimosAtivos;
     }
 }
