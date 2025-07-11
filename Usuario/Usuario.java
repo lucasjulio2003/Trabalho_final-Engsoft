@@ -1,4 +1,5 @@
 package Usuario;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,13 @@ public abstract class Usuario {
     }
     
     public boolean isDevedor() {
-        return isDevedor;
+        LocalDate hoje  = LocalDate.now();
+        for(Emprestimo emp : emprestimosAtivos){
+            if(emp.getDataDevolucao().isBefore(hoje)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setDevedor(boolean isDevedor) {
