@@ -5,7 +5,7 @@ import java.util.List;
 
 import Emprestimo.Emprestimo;
 import Emprestimo.IRegraEmprestimo;
-
+import Emprestimo.Reserva;
 import Livro.Livro;
 
 public abstract class Usuario {
@@ -63,6 +63,11 @@ public abstract class Usuario {
         } else {
             System.out.println("Erro: livro não consta como emprestado.");
         }
+    }
+    public void reservarLivro(LocalDate dataSolicitacao, Usuario usuario, Livro livro) {
+        Reserva reserva = new Reserva(dataSolicitacao, usuario, livro);
+        livro.adicionarReserva(reserva);
+        System.out.println("Livro reservado: " + livro.getTitulo() + " em " + dataSolicitacao);
     }
 
     public void setDevedor(boolean isDevedor) {

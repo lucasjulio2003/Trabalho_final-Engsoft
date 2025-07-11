@@ -1,17 +1,18 @@
 package Emprestimo;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import Livro.Livro;
 import Usuario.Usuario;
 
 public class Reserva {
-    private Date dataSolicitacao;
+    private LocalDate dataSolicitacao;
 
     private Usuario usuario;
     private Livro livro;
 
-    public Reserva(Date dataSolicitacao, Usuario usuario, Livro livro) {
+    public Reserva(LocalDate dataSolicitacao, Usuario usuario, Livro livro) {
         this.dataSolicitacao = dataSolicitacao;
         this.usuario = usuario;
         this.livro = livro;
@@ -25,11 +26,11 @@ public class Reserva {
         this.livro = livro;
     }
 
-    public Date getDataSolicitacao() {
+    public LocalDate getDataSolicitacao() {
         return dataSolicitacao;
     }
 
-    public void setDataSolicitacao(Date dataSolicitacao) {
+    public void setDataSolicitacao(LocalDate dataSolicitacao) {
         this.dataSolicitacao = dataSolicitacao;
     }
 

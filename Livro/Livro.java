@@ -33,6 +33,9 @@ public class Livro {
     public int getQuantidadeExemplaresDisponiveis(){
         return exemplares.size();
     }
+    public void adicionarReserva(Reserva r) {
+        reservas.add(r);
+    }
 
     public List<Reserva> getReservas() {
         return reservas;
