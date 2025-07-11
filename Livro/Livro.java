@@ -2,6 +2,7 @@ package Livro;
 import java.util.List;
 
 import Emprestimo.Reserva;
+import Usuario.Usuario;
 
 public class Livro {
     private String codigo;
@@ -28,6 +29,9 @@ public class Livro {
         if(exemplares.isEmpty())
             return false;
         return true;
+    }
+    public int getQuantidadeExemplaresDisponiveis(){
+        return exemplares.size();
     }
 
     public List<Reserva> getReservas() {
@@ -79,6 +83,13 @@ public class Livro {
     public void setExemplares(List<ExemplarLivro> exemplares) {
         this.exemplares = exemplares;
     }
-
+    public boolean usuarioTemReserva(Usuario usuario){
+        for(Reserva res: reservas){
+            if(res.getUsuario().equals(usuario)){
+                return true;
+            }
+        }
+        return false;
+    }
     
 }
