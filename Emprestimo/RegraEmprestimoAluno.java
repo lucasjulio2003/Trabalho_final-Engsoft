@@ -17,14 +17,13 @@ public class RegraEmprestimoAluno implements IRegraEmprestimo{
 
         // Tem exemplar?
         if (!livro.temExemplarDisponivel()) {
-            // return GerenciadorMensagem.falha("Não foi possível realizar o empréstimo: Não há exemplares disponíveis para o livro " + livro.getTitulo() + ".");
-            GerenciadorMensagem.falhaExemplares(livro);
+            GerenciadorMensagem.falhaExemplaresDisponivel(livro);
             return false;
         }
 
         //Usuario é devedor?
         if (usuario.isDevedor()) { // Assumindo que Usuario tem um método isDevedor()
-            GerenciadorMensagem.falhaDevedor(usuario);
+            GerenciadorMensagem.falhaUSuarioDevedor(usuario);
             return false;
         }
 
@@ -45,13 +44,13 @@ public class RegraEmprestimoAluno implements IRegraEmprestimo{
         if (qtdReservas < livro.getQuantidadeExemplaresDisponiveis() || temReserva) {
             // pode realizar o emprestimo
         } else {
-            return GerenciadorMensagem.falhaReservasEquantidadesDisponiveis(usuario);
-        }
-        // 6) O usuário não pode ter nenhum empréstimo em andamento de um exemplar desse mesmo livro
-        if(usuario.temEmprestimoAtivoDe(livro, "Ativo")){
-            return GerenciadorMensagem.falhaExemplarEmprestado(livro, usuario);
+            GerenciadorMensagem.falhaReservasEquantidadesDisponiveis(qtdReservas, qtdExemplaresDisponiveis);
         }
 
+        // 6) O usuário não pode ter nenhum empréstimo em andamento de um exemplar desse mesmo livro
+        if(usuario.temEmprestimoAtivoDe(livro, "ativo")){
+            GerenciadorMensagem.falhaEmprestimoAtivo(usuario);
+        }
 
         // Se passou em todas as etapas, permite o empréstimo
         return true;

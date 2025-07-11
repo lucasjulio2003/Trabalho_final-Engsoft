@@ -5,10 +5,10 @@ import Livro.Livro;
 import Usuario.Usuario;
 
 public class GerenciadorMensagem {
-    public static void falhaExemplares(Livro livro) {
+    public static void falhaExemplaresDisponivel(Livro livro) {
         System.out.println("Não foi possível realizar o empréstimo: Não há exemplares disponíveis para o livro " + livro + ".");
     }
-    public static void falhaDevedor(Usuario usuario) {
+    public static void falhaUSuarioDevedor(Usuario usuario) {
         System.out.println("Não foi possível realizar o empréstimo: O usuário " + usuario + " possui livros em atraso.");
     }
     public static void falhaExemplarEmprestado(Usuario usuario, Livro livro) {
@@ -19,8 +19,17 @@ public class GerenciadorMensagem {
             + " emprestado.");
     }
     public static void falhaLimiteMax(Usuario usuario, int limite) {
-        System.out.println("Não foi possível realizar o empréstimo: O usuário " + usuario + " atingiu o limite máximo de livros (" + limite + ") emprestados simultaneamente.");
+        System.out.println("Não foi possível realizar o empréstimo: O usuário " + usuario + " atingiu o limite máximo (" + limite + ") de livros emprestados simultaneamente.");
     }
+    public static void falhaReservasEquantidadesDisponiveis(int qtdReservas, int qtdExemplaresDisponiveis){
+        System.out.println("Não foi possível realizar o empréstimo: Há " + qtdReservas + "de reserva(s) e apenas " + qtdExemplaresDisponiveis + " exemplar(es) disponível(is) e você não possui uma reserva prioritária.\""
+        );
+
+    }
+    public static void falhaEmprestimoAtivo(Usuario usuario) {
+        System.out.println("Não foi possível realizar o empréstimo: O usuário " + usuario + " empréstimo em andamento de um exemplar desse mesmo livro.");
+    }
+
 
     public static void sucesso(String mensagem) {
         System.out.println("Emprestimo realizado");
