@@ -53,12 +53,7 @@ public class RegraEmprestimoAluno implements IRegraEmprestimo{
             );
         }
         // 6) O usuário não pode ter nenhum empréstimo em andamento de um exemplar desse mesmo livro
-        for (Emprestimo emp : usuario.getEmprestimosAtivos()) {
-            if (emp.setStatus("Ativo") && emp.exemplarLivro().getCodigo().equals(livro.getCodigo())) {
-                GerenciadorMensagem.falhaExemplarEmprestado(usuario, livro);
-                return false;
-            }
-        }
+        
 
 
         // Se todas as verificações passaram
