@@ -57,6 +57,13 @@ public abstract class Usuario {
         }
         return false;
     }
+    public void realizarDevolucao(Livro livro) {
+        if (emprestimos.remove(livro)) {
+            System.out.println("Livro devolvido: " + livro.getTitulo());
+        } else {
+            System.out.println("Erro: livro não consta como emprestado.");
+        }
+    }
 
     public void setDevedor(boolean isDevedor) {
         this.isDevedor = isDevedor;

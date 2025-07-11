@@ -35,12 +35,12 @@ public class RegraEmprestimoAluno implements IRegraEmprestimo{
 
         // 4 e 5) Regras de prioridade por reserva:
         // 4) qtdReservas < qtdDisponiveis (ok)  
-        // 5) se qtdReservas >= qtdDisponiveis, só permite se o usuário tiver reserva        int qtdReservas = livro.getReservas().size();
+        // 5) se qtdReservas >= qtdDisponiveis, só permite se o usuário tiver reserva  int qtdReservas = livro.getReservas().size();
         int qtdExemplaresDisponiveis = livro.getQuantidadeExemplaresDisponiveis();
         int qtdReservas = livro.getReservas().size();
         boolean temReserva = livro.usuarioTemReserva(usuario);
 
-        // só segue se (reservas < disponíveis) OU (o próprio usuário tiver reserva)
+        // so segue se (reservas < disponíveis) OU (o próprio usuário tiver reserva)
         if (qtdReservas < livro.getQuantidadeExemplaresDisponiveis() || temReserva) {
             // pode realizar o emprestimo
         } else {
