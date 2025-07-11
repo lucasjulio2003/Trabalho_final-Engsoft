@@ -1,6 +1,7 @@
 package Emprestimo;
 
 import Livro.Livro;
+import Sistema.GerenciadorMensagem;
 import Usuario.Usuario;
 
 public class RegraEmprestimoProfessor implements IRegraEmprestimo{
@@ -8,19 +9,16 @@ public class RegraEmprestimoProfessor implements IRegraEmprestimo{
 
     @Override
     public boolean verificarEmprestimo(Usuario usuario, Livro livro) {
-         if (!livro.temExemplarDisponivel()) {
-            return GerenciadorMensagem.falha(
-                "Não foi possível realizar o empréstimo: não há exemplares disponíveis para o livro "
-                + livro.getTitulo() + "."
-            );
+        if (!livro.temExemplarDisponivel()) {
+            GerenciadorMensagem.falhaExemplaresDisponivel(livro);
+            return false;
         }
-         if (usuario.isDevedor()) {
-            return GerenciadorMensagem.falha(
-                "Não foi possível realizar o empréstimo: o usuário ""
-                + usuario.getNome() + "" possui livros em atraso."
-            );
-        }
-        return GerenciadorMensagem.sucesso();
-    }
 
+        //Usuario é devedor?
+        if (usuario.isDevedor()) { // Assumindo que Usuario tem um método isDevedor()
+            GerenciadorMensagem.falhaUSuarioDevedor(usuario);
+            return false;
+        }
+    return true;
+    }
 }

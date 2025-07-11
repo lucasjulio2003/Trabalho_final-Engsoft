@@ -19,7 +19,7 @@ public class GerenciadorMensagem {
             + " emprestado.");
     }
     public static void falhaLimiteMax(Usuario usuario, int limite) {
-        System.out.println("Não foi possível realizar o empréstimo: O usuário " + usuario + " atingiu o limite máximo (" + limite + ") de livros emprestados simultaneamente.");
+        System.out.println("Não foi possível realizar o empréstimo: O usuário " + usuario + " atingiu o limite máximo (" + usuario.getLimiteEmprestimos() + ") de livros emprestados simultaneamente.");
     }
     public static void falhaReservasEquantidadesDisponiveis(int qtdReservas, int qtdExemplaresDisponiveis){
         System.out.println("Não foi possível realizar o empréstimo: Há " + qtdReservas + "de reserva(s) e apenas " + qtdExemplaresDisponiveis + " exemplar(es) disponível(is) e você não possui uma reserva prioritária.\""

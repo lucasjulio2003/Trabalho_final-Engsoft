@@ -45,11 +45,13 @@ public class RegraEmprestimoAluno implements IRegraEmprestimo{
             // pode realizar o emprestimo
         } else {
             GerenciadorMensagem.falhaReservasEquantidadesDisponiveis(qtdReservas, qtdExemplaresDisponiveis);
+            return false;
         }
 
         // 6) O usuário não pode ter nenhum empréstimo em andamento de um exemplar desse mesmo livro
         if(usuario.temEmprestimoAtivoDe(livro, "ativo")){
             GerenciadorMensagem.falhaEmprestimoAtivo(usuario);
+            return false;
         }
 
         // Se passou em todas as etapas, permite o empréstimo
