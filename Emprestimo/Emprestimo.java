@@ -2,18 +2,19 @@ package Emprestimo;
 import Livro.ExemplarLivro;
 import Usuario.Usuario;
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Emprestimo {
     private Usuario usuario;
     private String tituloLivro;
     private Date dataEmprestimo;
     private String status;
-    private Date dataDevolucao;
+    private LocalDate dataDevolucao;
     private ExemplarLivro exemplarLivro;
     private Date dataDevolucaoReal;
     
 
-    public Emprestimo(String tituloLivro, Date dataEmprestimo, String status, Date dataDevolucao, ExemplarLivro exemplarLivro){
+    public Emprestimo(String tituloLivro, Date dataEmprestimo, String status, LocalDate dataDevolucao, ExemplarLivro exemplarLivro){
         this.tituloLivro = tituloLivro;
         this.dataEmprestimo = dataEmprestimo;
         this.status = status;
@@ -46,11 +47,11 @@ public class Emprestimo {
         this.status = status;
     }
 
-    public Date getDataDevolucao() {
+    public LocalDate getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(Date dataDevolucao) {
+    public void setDataDevolucao(LocalDate dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 
