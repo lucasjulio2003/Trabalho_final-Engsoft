@@ -19,6 +19,6 @@ public class ComandoReservar implements Comando {
         Livro livro     = repositorio.buscarLivroPorCodigo(idLivro);
 
         LocalDate dataReserva = LocalDate.now();
-        usuario.reservarLivro(dataReserva, usuario,livro);
+        livro.reservarLivro(dataReserva, usuario,livro);
     }
 }

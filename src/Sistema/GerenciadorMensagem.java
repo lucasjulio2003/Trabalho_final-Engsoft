@@ -26,10 +26,9 @@ public class GerenciadorMensagem {
         int qtdExemplaresDisponiveis = livro.getExemplares().size();
         System.out.println("Não foi possível realizar o empréstimo: Há " + qtdReservas + "de reserva(s) e apenas " + qtdExemplaresDisponiveis + " exemplar(es) disponível(is) e você não possui uma reserva prioritária.\""
         );
-
     }
     public static void falhaEmprestimoAtivo(Usuario usuario) {
-        System.out.println("Não foi possível realizar o empréstimo: O usuário " + usuario + " empréstimo em andamento de um exemplar desse mesmo livro.");
+        System.out.println("Não foi possível realizar o empréstimo: O usuário " + usuario.getNome() + " possui um empréstimo em andamento de um exemplar desse mesmo livro.");
     }
 
 

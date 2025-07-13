@@ -6,6 +6,7 @@ import java.util.List;
 import Emprestimo.Emprestimo;
 import Emprestimo.IRegraEmprestimo;
 import Emprestimo.Reserva;
+import Livro.ExemplarLivro;
 import Livro.Livro;
 
 public abstract class Usuario {
@@ -25,16 +26,53 @@ public abstract class Usuario {
 
     public abstract int getLimiteEmprestimos();
 
-    public void realizarEmprestimo(Livro livro){
-
-        if(this.regraEmprestimo.verificarEmprestimo(this, livro)){
-            // faz emprestimo
-            System.out.println("Fazendo emprestimo");
-            return;
+    public void realizarEmprestimo(Livro livro) {
+        System.out.println("entrouaqui");
+        if (this.regraEmprestimo.verificarEmprestimo(this, livro)) {
+            System.out.println("veio pro if.");
+            
+            boolean jaExiste = false;
+            
+            if (emprestimosAtivos.isEmpty()) {
+                System.out.println("Lista vazia, criando primeiro empréstimo.");
+                ExemplarLivro exemplarDisponivel = livro.buscarExemplarDisponivel();
+                if (exemplarDisponivel != null) {
+                    exemplarDisponivel.setStatus(ExemplarLivro.Status.EMPRESTADO);
+                    Emprestimo emp = Emprestimo.criarNovoEmprestimo(livro.getTitulo(), exemplarDisponivel);
+                    emprestimosAtivos.add(emp);
+                    System.out.println("Novo empréstimo realizado com sucesso!");
+                } else {
+                    System.out.println("Nenhum exemplar disponível.");
+                }
+            } else {
+                // Verifica se já existe empréstimo para este livro
+                for (Emprestimo empAtivo : emprestimosAtivos) {
+                    System.out.println("veio pro for tem emprestimo ativo.");
+                    if (empAtivo.getExemplarLivro().getCodigoLivro().equals(livro.getCodigo())) {
+                        System.out.println("Empréstimo já existe para este livro.");
+                        jaExiste = true;
+                        break;
+                    }
+                }
+                
+                // Se não existe, cria novo empréstimo
+                // if (!jaExiste) {
+                //     ExemplarLivro exemplarDisponivel = livro.buscarExemplarDisponivel();
+                //     if (exemplarDisponivel != null) {
+                //         exemplarDisponivel.setStatus(ExemplarLivro.Status.EMPRESTADO);
+                //         Emprestimo emp = Emprestimo.criarNovoEmprestimo(livro.getTitulo(), exemplarDisponivel);
+                //         emprestimosAtivos.add(emp);
+                //         System.out.println("✅ Novo empréstimo realizado com sucesso!");
+                //     } else {
+                //         System.out.println("❌ Nenhum exemplar disponível.");
+                //     }
+                // }
+            }
+        } else {
+            System.out.println("Empréstimo negado pelas regras.");
         }
-
-        System.out.println("Emprestimo negado");
     }
+                    
 
     public IRegraEmprestimo getRegraEmprestimo(){
         return this.regraEmprestimo;
@@ -52,9 +90,11 @@ public abstract class Usuario {
 
     public void realizarDevolucao(Livro livro) {
         for (Emprestimo emp : emprestimosAtivos) {
-            if (emp.getExemplarLivro().getCodigo().equals(livro.getCodigo())) {
+            if (emp.getExemplarLivro().getCodigoLivro().equals(livro.getCodigo())) {
                 emprestimosAtivos.remove(emp); 
+                emp.getExemplarLivro().setStatus(ExemplarLivro.Status.DISPONIVEL);
                 emprestimos.add(emp);
+                emp.registrarDevolucao(); //pega a data
                 System.out.println("Devolução realizada com sucesso!");
                 return;
             }
@@ -106,7 +146,7 @@ public abstract class Usuario {
                 "id='" + id + '\'' +
                 ", nome='" + nome + '\'' +
                 ", isDevedor=" + isDevedor +
-                ", emprestimos=" + emprestimos +
+                ", emprestimos=" + emprestimosAtivos +
                 '}';
     }
 }

@@ -1,9 +1,12 @@
 package Livro;
 import java.util.List;
 
+import Emprestimo.Emprestimo;
 import Emprestimo.Reserva;
 import Sistema.GerenciadorMensagem;
 import Usuario.Usuario;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Livro {
@@ -26,14 +29,24 @@ public class Livro {
         this.edicao = edicao;
         this.anoPublicacao = anoPublicacao;
         this.exemplares = new ArrayList<ExemplarLivro>();
+        this.reservas = new ArrayList<>();
     }
 
+    public ExemplarLivro buscarExemplarDisponivel() {
+    for (ExemplarLivro ex : exemplares) {
+        if (ex.getStatus() == ExemplarLivro.Status.DISPONIVEL) {
+            return ex;
+        }
+    }
+        return null;
+    }
 
     public boolean temExemplarDisponivel(){
         if(exemplares.isEmpty())
             return false;
         return true;
     }
+
     public boolean reservasEexemplaresAdequados(Usuario usuario) {
         int qtdExemplaresDisponiveis = exemplares.size();
         int qtdReservas = getReservas().size();
@@ -42,6 +55,24 @@ public class Livro {
         return (qtdReservas < qtdExemplaresDisponiveis || temReserva);
         
     }
+
+    public void reservarLivro(LocalDate dataSolicitacao, Usuario usuario, Livro livro) {
+        Reserva reserva = new Reserva(dataSolicitacao, usuario, livro);
+        livro.adicionarReserva(reserva);
+        System.out.println("Reserva realizada com sucesso para o livro: " + livro.getTitulo());
+    }
+
+    // public Emprestimo realizarEmprestimoPara(Usuario usuario) {
+    //     for (ExemplarLivro ex : exemplares) {
+    //         if (ex.getStatus() == ExemplarLivro.Status.DISPONIVEL) {
+    //             ex.setStatus(ExemplarLivro.Status.EMPRESTADO);
+    //             Emprestimo emprestimo = new Emprestimo(titulo, LocalDate.now(), LocalDate.now().plusDays(14), ex);
+    //             emprestimo.setDataEmprestimo(LocalDate.now());
+    //             return emprestimo;
+    //         }
+    //     }
+    //     return null; // Nenhum exemplar disponível
+    // }
 
     public void adicionarReserva(Reserva r) {
         reservas.add(r);

@@ -16,13 +16,15 @@ public class ComandoEmprestar implements Comando {
         String idLivro = carregadorParametros.getParametroDois();
         System.out.println(idLivro);
         Repositorio repositorio = Repositorio.getRepositorio();
-        System.out.println("Repositorio: " + repositorio);
+        // System.out.println("Repositorio: " + repositorio);
         Usuario usuario = repositorio.buscarUsuarioPorCodigo(idUsuario);
         Livro livro = repositorio.buscarLivroPorCodigo(idLivro);
-        System.out.println("Emprestimo realizado com sucesso!");
-        System.out.println("Usuario: " + usuario + " | Livro: " + livro);
+        System.out.println("id encontrado");
+        System.out.println("Usuario: " + usuario);
 
-        //usuario.realizarEmprestimo(livro);
+        System.out.println("chamando comando realizar emrpestmo");
+        usuario.realizarEmprestimo(livro);
+        
         
     }
 

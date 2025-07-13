@@ -7,18 +7,28 @@ import java.time.LocalDate;
 public class Emprestimo {
     private Usuario usuario;
     private String tituloLivro;
-    private Date dataEmprestimo;
+    private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
     private ExemplarLivro exemplarLivro;
-    private Date dataDevolucaoReal;
+    private LocalDate dataDevolucaoReal;
     
 
-    public Emprestimo(String tituloLivro, Date dataEmprestimo, LocalDate dataDevolucao, ExemplarLivro exemplarLivro){
+    public Emprestimo(String tituloLivro, LocalDate dataEmprestimo, LocalDate dataDevolucao, ExemplarLivro exemplarLivro){
         this.tituloLivro = tituloLivro;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
         this.exemplarLivro = exemplarLivro;
         this.dataDevolucaoReal = null;
+    }
+    public static Emprestimo criarNovoEmprestimo(String tituloLivro, ExemplarLivro exemplar) {
+        Emprestimo emprestimo = new Emprestimo(
+            tituloLivro, 
+            LocalDate.now(), 
+            LocalDate.now().plusDays(14), 
+            exemplar
+        );
+        emprestimo.setDataEmprestimo(LocalDate.now());
+        return emprestimo;
     }
 
     public String getTituloLivro() {
@@ -29,11 +39,11 @@ public class Emprestimo {
         this.tituloLivro = tituloLivro;
     }
 
-    public Date getDataEmprestimo() {
+    public LocalDate getDataEmprestimo() {
         return dataEmprestimo;
     }
 
-    public void setDataEmprestimo(Date dataEmprestimo) {
+    public void setDataEmprestimo(LocalDate dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
 
@@ -55,9 +65,9 @@ public class Emprestimo {
     }
     
     public void registrarDevolucao() {
-        this.dataDevolucaoReal = new Date(System.currentTimeMillis()); //alterar pra localdate.now
+        this.dataDevolucaoReal = LocalDate.now(); 
     }
-    public Date getDataDevolucaoReal() {
+    public LocalDate getDataDevolucaoReal() {
         return dataDevolucaoReal;
     }
     //pra debug
