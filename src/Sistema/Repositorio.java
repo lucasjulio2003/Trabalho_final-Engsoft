@@ -44,5 +44,8 @@ public class Repositorio {
 
         return null;
     }
+    public void addUsuario(Usuario novoUsuario){
+        usuarios.add(novoUsuario);
+    }
 
 }
