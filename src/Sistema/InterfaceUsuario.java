@@ -2,7 +2,7 @@
 
 	import java.util.HashMap;
 	import java.util.Scanner;
-
+	import Sistema.CarregadorParametros;
 	import Comandos.*;
 
 	public class InterfaceUsuario {

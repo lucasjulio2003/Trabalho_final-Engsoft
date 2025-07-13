@@ -7,13 +7,13 @@ import java.time.LocalDate;
 public class Emprestimo {
     private Usuario usuario;
     private String tituloLivro;
-    private Date dataEmprestimo;
+    private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
     private ExemplarLivro exemplarLivro;
     private Date dataDevolucaoReal;
     
 
-    public Emprestimo(String tituloLivro, Date dataEmprestimo, LocalDate dataDevolucao, ExemplarLivro exemplarLivro){
+    public Emprestimo(String tituloLivro, LocalDate dataEmprestimo, LocalDate dataDevolucao, ExemplarLivro exemplarLivro){
         this.tituloLivro = tituloLivro;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
@@ -29,11 +29,11 @@ public class Emprestimo {
         this.tituloLivro = tituloLivro;
     }
 
-    public Date getDataEmprestimo() {
+    public LocalDate getDataEmprestimo() {
         return dataEmprestimo;
     }
 
-    public void setDataEmprestimo(Date dataEmprestimo) {
+    public void setDataEmprestimo(LocalDate dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
 

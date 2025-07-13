@@ -52,6 +52,8 @@ public class ExemplarLivro {
     public void setLivro(Livro livro) {
         this.livro = livro;
     }
-    
+    public String getCodigoLivro(){
+        return livro.getCodigo();
+    }
     
 }

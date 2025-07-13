@@ -4,6 +4,7 @@ import java.util.List;
 import Emprestimo.Reserva;
 import Sistema.GerenciadorMensagem;
 import Usuario.Usuario;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Livro {
@@ -41,6 +42,12 @@ public class Livro {
         
         return (qtdReservas < qtdExemplaresDisponiveis || temReserva);
         
+    }
+    
+    public void reservarLivro(LocalDate dataSolicitacao, Usuario usuario, Livro livro) {
+        Reserva reserva = new Reserva(dataSolicitacao, usuario, livro);
+        livro.adicionarReserva(reserva);
+        System.out.println("Livro reservado: " + livro.getTitulo() + " em " + dataSolicitacao);
     }
 
     public void adicionarReserva(Reserva r) {

@@ -1,9 +1,9 @@
 package Comandos;
 
-import java.time.LocalDate;
+import Livro.Livro;
 import Sistema.Repositorio;
 import Usuario.Usuario;
-import Livro.Livro;
+import java.time.LocalDate;
 
 public class ComandoReservar implements Comando {
 
@@ -19,6 +19,6 @@ public class ComandoReservar implements Comando {
         Livro livro     = repositorio.buscarLivroPorCodigo(idLivro);
 
         LocalDate dataReserva = LocalDate.now();
-        usuario.reservarLivro(dataReserva, usuario,livro);
+        livro.reservarLivro(dataReserva, usuario,livro);
     }
 }
