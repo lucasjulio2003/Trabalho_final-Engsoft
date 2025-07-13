@@ -7,6 +7,7 @@ import Emprestimo.Emprestimo;
 import Emprestimo.IRegraEmprestimo;
 import Emprestimo.Reserva;
 import Livro.ExemplarLivro;
+import Livro.ExemplarLivro;
 import Livro.Livro;
 
 public abstract class Usuario {
@@ -88,7 +89,8 @@ public abstract class Usuario {
         return false;
     }
 
-    public void realizarDevolucao(Livro livro) {
+    public void realizarDevolucao(ExemplarLivro livro) {
+        //tirar de emprestimosativos
         for (Emprestimo emp : emprestimosAtivos) {
             if (emp.getExemplarLivro().getCodigoLivro().equals(livro.getCodigo())) {
                 emprestimosAtivos.remove(emp); 
@@ -99,15 +101,9 @@ public abstract class Usuario {
                 return;
             }
         }
-        System.out.println("Nenhum empréstimo ativo encontrado para o livro: " + livro.getTitulo());
     }
 
     
-    public void reservarLivro(LocalDate dataSolicitacao, Usuario usuario, Livro livro) {
-        Reserva reserva = new Reserva(dataSolicitacao, usuario, livro);
-        livro.adicionarReserva(reserva);
-        System.out.println("Livro reservado: " + livro.getTitulo() + " em " + dataSolicitacao);
-    }
 
     public void setDevedor(boolean isDevedor) {
         this.isDevedor = isDevedor;
