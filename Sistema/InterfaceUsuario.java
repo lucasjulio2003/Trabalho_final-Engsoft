@@ -16,6 +16,8 @@ public class InterfaceUsuario {
 
     private void inicializarComandos() {
 		comandos.put("emp", new ComandoEmprestar());
+		comandos.put("res", new ComandoReservar());
+		comandos.put("dev", new ComandoDevolver());
 	}
 	
 	public void executarComando(String strComando, CarregadorParametros parametros) {
@@ -36,7 +38,7 @@ public class InterfaceUsuario {
 
 			String comando = parametros[0];
 
-			if (comando == "exit"){
+			if (comando == "sai"){
 				System.exit(0);
 			}
 

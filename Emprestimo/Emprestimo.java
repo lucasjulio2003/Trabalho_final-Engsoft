@@ -64,7 +64,7 @@ public class Emprestimo {
     }
     
     public void registrarDevolucao() {
-        this.dataDevolucaoReal = new Date(System.currentTimeMillis());
+        this.dataDevolucaoReal = new Date(System.currentTimeMillis()); //alterar pra localdate.now
     }
     public Date getDataDevolucaoReal() {
         return dataDevolucaoReal;
