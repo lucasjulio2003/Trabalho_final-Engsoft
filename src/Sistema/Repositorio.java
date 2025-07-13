@@ -47,5 +47,8 @@ public class Repositorio {
     public void addUsuario(Usuario novoUsuario){
         usuarios.add(novoUsuario);
     }
+    public void addLivro(Livro novoLivro){
+        livros.add(novoLivro);
+    }
 
 }

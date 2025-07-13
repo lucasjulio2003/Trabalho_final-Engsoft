@@ -23,7 +23,9 @@ public class Livro {
         this.autores = autores;
         this.edicao = edicao;
         this.anoPublicacao = anoPublicacao;
+        this.exemplares = new ArrayList<ExemplarLivro>();
     }
+
 
     public boolean temExemplarDisponivel(){
         if(exemplares.isEmpty())
@@ -93,6 +95,9 @@ public class Livro {
             }
         }
         return false;
+    }
+    public void addExemplar(ExemplarLivro novoExemplar){
+        exemplares.add(novoExemplar);
     }
     
 }
