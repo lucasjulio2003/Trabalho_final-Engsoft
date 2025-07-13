@@ -89,7 +89,7 @@ public abstract class Usuario {
         return false;
     }
 
-    public void realizarDevolucao(ExemplarLivro livro) {
+    public void realizarDevolucao(Livro livro) {
         //tirar de emprestimosativos
         for (Emprestimo emp : emprestimosAtivos) {
             if (emp.getExemplarLivro().getCodigoLivro().equals(livro.getCodigo())) {
