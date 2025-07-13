@@ -36,25 +36,19 @@ public class RegraEmprestimoAluno implements IRegraEmprestimo{
         // 4 e 5) Regras de prioridade por reserva:
         // 4) qtdReservas < qtdDisponiveis (ok)  
         // 5) se qtdReservas >= qtdDisponiveis, só permite se o usuário tiver reserva  int qtdReservas = livro.getReservas().size();
-        int qtdExemplaresDisponiveis = livro.getQuantidadeExemplaresDisponiveis();
-        int qtdReservas = livro.getReservas().size();
-        boolean temReserva = livro.usuarioTemReserva(usuario);
-
-        // so segue se (reservas < disponíveis) OU (o próprio usuário tiver reserva)
-        if (qtdReservas < livro.getQuantidadeExemplaresDisponiveis() || temReserva) {
-            // pode realizar o emprestimo
-        } else {
-            GerenciadorMensagem.falhaReservasEquantidadesDisponiveis(qtdReservas, qtdExemplaresDisponiveis);
-            return false;
+        if (!livro.reservasEexemplaresAdequados(usuario)) {
+            GerenciadorMensagem.falhaReservasEquantidadesDisponiveis(livro);
         }
 
         // 6) O usuário não pode ter nenhum empréstimo em andamento de um exemplar desse mesmo livro
-        // if(usuario.temEmprestimoAtivoDe(livro, "ativo")){
-        //     GerenciadorMensagem.falhaEmprestimoAtivo(usuario);
-        //     return false;
-        // }
+        if(usuario.getEmprestimosAtivos().isEmpty()) {
+            GerenciadorMensagem.falhaEmprestimoAtivo(usuario);
+            return false;
+        }
 
         // Se passou em todas as etapas, permite o empréstimo
         return true;
     }
+
+
 }

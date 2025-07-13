@@ -49,14 +49,6 @@ public abstract class Usuario {
         }
         return false;
     }
-    // public boolean temEmprestimoAtivoDe(Livro livro, String status) {
-    //     for (Emprestimo emp : emprestimosAtivos) {
-    //         if (emp.getStatus().equals(status) && emp.getExemplarLivro().getCodigo().equals(livro.getCodigo())) {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
 
     public void realizarDevolucao(Livro livro) {
         for (Emprestimo emp : emprestimosAtivos) {

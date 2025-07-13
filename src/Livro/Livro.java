@@ -2,6 +2,7 @@ package Livro;
 import java.util.List;
 
 import Emprestimo.Reserva;
+import Sistema.GerenciadorMensagem;
 import Usuario.Usuario;
 import java.util.ArrayList;
 
@@ -33,9 +34,15 @@ public class Livro {
             return false;
         return true;
     }
-    public int getQuantidadeExemplaresDisponiveis(){
-        return exemplares.size();
+    public boolean reservasEexemplaresAdequados(Usuario usuario) {
+        int qtdExemplaresDisponiveis = exemplares.size();
+        int qtdReservas = getReservas().size();
+        boolean temReserva = usuarioTemReserva(usuario);
+        
+        return (qtdReservas < qtdExemplaresDisponiveis || temReserva);
+        
     }
+
     public void adicionarReserva(Reserva r) {
         reservas.add(r);
     }
