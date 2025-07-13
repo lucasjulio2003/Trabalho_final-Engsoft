@@ -1,16 +1,18 @@
 package Sistema;
-import Repositorio;
+import Livro.ExemplarLivro;
+import Livro.Livro;
 import Usuario.*;
+import java.util.List;
 
 public class Programa {
     
 
     public static void main(String[] args) {
-        Repositorio repo = repo.getRepositorio();
-        Usuario usu = new AlunoGrad('123', 'João da Silva');
-        Usuario usu2 = new AlunoPosGrad('456', 'Luiz Fernando Rodrigues');
-        Usuario usu3 = new Professor('100', 'Carlos Lucena');
-        Usuario usu4 = new AlunoGrad('789', 'Pedro Paulo');
+        Repositorio repo = Repositorio.getRepositorio();
+        Usuario usu = new AlunoGrad("123", "João da Silva");
+        Usuario usu2 = new AlunoPosGrad("456", "Luiz Fernando Rodrigues");
+        Usuario usu3 = new Professor("100", "Carlos Lucena");
+        Usuario usu4 = new AlunoGrad("789", "Pedro Paulo");
 
         repo.addUsuario(usu);
         repo.addUsuario(usu2);

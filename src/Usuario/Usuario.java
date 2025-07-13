@@ -101,6 +101,15 @@ public abstract class Usuario {
     public List<Emprestimo> getEmprestimosAtivos() {
         return emprestimosAtivos;
     }
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id='" + id + '\'' +
+                ", nome='" + nome + '\'' +
+                ", isDevedor=" + isDevedor +
+                ", emprestimos=" + emprestimos +
+                '}';
+    }
 }
 
 

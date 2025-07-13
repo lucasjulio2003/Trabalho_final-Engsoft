@@ -27,17 +27,21 @@ public class Repositorio {
 
     public Usuario buscarUsuarioPorCodigo(String codigo){
         for (Usuario usuario: this.usuarios){
-            if (usuario.getId() == codigo){
+            if (usuario.getId().equals(codigo)){
+                System.out.println("Usuario encontrado: " + usuario.getNome());
+                System.out.println("ID: " + usuario.getId());
                 return usuario;
             }
+            System.out.println("Usuario não encontrado com o ID: " + codigo);
         }
 
         return null;
     }
 
+
     public Livro buscarLivroPorCodigo(String codigo){
         for (Livro livro: this.livros){
-            if (livro.getCodigo() == codigo){
+            if (livro.getCodigo().equals(codigo)){
                 return livro;
             }
         }
@@ -46,9 +50,18 @@ public class Repositorio {
     }
     public void addUsuario(Usuario novoUsuario){
         usuarios.add(novoUsuario);
+        System.out.println("Usuario adicionado: " + novoUsuario.getNome()); 
+        System.out.println("ID: " + novoUsuario.getId());
+        System.out.println(usuarios);
     }
     public void addLivro(Livro novoLivro){
         livros.add(novoLivro);
     }
-
+    @Override
+    public String toString() {
+        return "Repositorio{" +
+                "usuarios=" + usuarios +
+                ", livros=" + livros +
+                '}';
+    }
 }

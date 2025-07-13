@@ -20,5 +20,9 @@ public class CarregadorParametros {
 	public String getParametroDois() {
 		return parametroDois;
 	}
+	@Override
+	public String toString() {
+		return "CarregadorParametros [parametroUm=" + parametroUm + ", parametroDois=" + parametroDois + "]";
+	}
 
 }

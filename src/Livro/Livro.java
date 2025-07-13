@@ -3,6 +3,7 @@ import java.util.List;
 
 import Emprestimo.Reserva;
 import Usuario.Usuario;
+import java.util.ArrayList;
 
 public class Livro {
     private String codigo;
@@ -98,6 +99,18 @@ public class Livro {
     }
     public void addExemplar(ExemplarLivro novoExemplar){
         exemplares.add(novoExemplar);
+    }
+    @Override
+    public String toString() {
+        return "Livro{" +
+                "codigo='" + codigo + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", editora='" + editora + '\'' +
+                ", autores=" + autores +
+                ", edicao='" + edicao + '\'' +
+                ", anoPublicacao='" + anoPublicacao + '\'' +
+                ", exemplares=" + exemplares +
+                '}';
     }
     
 }

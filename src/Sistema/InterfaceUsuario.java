@@ -35,15 +35,19 @@ public class InterfaceUsuario {
 			String input = scanner.nextLine();
 
 			String[] parametros = input.split(" ");
+			//System.out.println("Comando inválido. Use o formato: comando parametro1 parametro2");
 
 			String comando = parametros[0];
+			System.out.println("Parametros:" + parametros[1] + " " + parametros[2]);
 
 			if (comando == "sai"){
 				System.exit(0);
 			}
 
 			CarregadorParametros carregadorParametros = new CarregadorParametros(parametros[1], parametros[2]);
-
+			
+			System.out.println(carregadorParametros);
+			
 			this.executarComando(comando, carregadorParametros);
 
 			scanner.close();
