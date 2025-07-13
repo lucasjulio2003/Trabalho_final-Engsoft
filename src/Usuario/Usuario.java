@@ -57,13 +57,20 @@ public abstract class Usuario {
     //     }
     //     return false;
     // }
+
     public void realizarDevolucao(Livro livro) {
-        if (emprestimos.remove(livro)) {
-            System.out.println("Livro devolvido: " + livro.getTitulo());
-        } else {
-            System.out.println("Erro: livro não consta como emprestado.");
+        for (Emprestimo emp : emprestimosAtivos) {
+            if (emp.getExemplarLivro().getCodigo().equals(livro.getCodigo())) {
+                emprestimosAtivos.remove(emp); 
+                emprestimos.add(emp);
+                System.out.println("Devolução realizada com sucesso!");
+                return;
+            }
         }
+        System.out.println("Nenhum empréstimo ativo encontrado para o livro: " + livro.getTitulo());
     }
+
+    
     public void reservarLivro(LocalDate dataSolicitacao, Usuario usuario, Livro livro) {
         Reserva reserva = new Reserva(dataSolicitacao, usuario, livro);
         livro.adicionarReserva(reserva);

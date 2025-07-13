@@ -18,12 +18,11 @@ public class Repositorio {
     }
     
     public static Repositorio getRepositorio(){
-        if (repositorio == null){
-            return new Repositorio();
-        } else{
-            return repositorio;
-        }
+    if (repositorio == null){
+        repositorio = new Repositorio();  
     }
+    return repositorio;
+}
 
     public Usuario buscarUsuarioPorCodigo(String codigo){
         for (Usuario usuario: this.usuarios){

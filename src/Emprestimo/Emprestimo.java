@@ -8,16 +8,14 @@ public class Emprestimo {
     private Usuario usuario;
     private String tituloLivro;
     private Date dataEmprestimo;
-    private String status;
     private LocalDate dataDevolucao;
     private ExemplarLivro exemplarLivro;
     private Date dataDevolucaoReal;
     
 
-    public Emprestimo(String tituloLivro, Date dataEmprestimo, String status, LocalDate dataDevolucao, ExemplarLivro exemplarLivro){
+    public Emprestimo(String tituloLivro, Date dataEmprestimo, LocalDate dataDevolucao, ExemplarLivro exemplarLivro){
         this.tituloLivro = tituloLivro;
         this.dataEmprestimo = dataEmprestimo;
-        this.status = status;
         this.dataDevolucao = dataDevolucao;
         this.exemplarLivro = exemplarLivro;
         this.dataDevolucaoReal = null;
@@ -39,13 +37,6 @@ public class Emprestimo {
         this.dataEmprestimo = dataEmprestimo;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public LocalDate getDataDevolucao() {
         return dataDevolucao;
