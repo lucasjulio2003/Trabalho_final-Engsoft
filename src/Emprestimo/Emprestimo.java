@@ -59,6 +59,14 @@ public class Emprestimo {
         return exemplarLivro;
     }
 
+    public void tornarExemplarDisponivel(){
+        this.exemplarLivro.setStatus(ExemplarLivro.Status.DISPONIVEL);
+    }
+
+    public String getCodigoExemplar(){
+        return this.exemplarLivro.getCodigo();
+    }
+
     public void setExemplarLivro(ExemplarLivro exemplarLivro) {
         this.exemplarLivro = exemplarLivro;
     }

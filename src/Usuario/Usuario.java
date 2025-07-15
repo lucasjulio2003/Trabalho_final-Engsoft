@@ -53,7 +53,7 @@ public abstract class Usuario {
                 // Verifica se já existe empréstimo para este livro
                 for (Emprestimo empAtivo : emprestimosAtivos) {
                     System.out.println("veio pro for tem emprestimo ativo.");
-                    if (empAtivo.getExemplarLivro().getCodigoLivro().equals(livro.getCodigo())) {
+                    if (empAtivo.getCodigoExemplar().equals(livro.getCodigo())) {
                         System.out.println("Empréstimo já existe para este livro.");
                         jaExiste = true;
                         break;
@@ -82,9 +82,9 @@ public abstract class Usuario {
     public void realizarDevolucao(Livro livro) {
         //tirar de emprestimosativos
         for (Emprestimo emp : emprestimosAtivos) {
-            if (emp.getExemplarLivro().getCodigoLivro().equals(livro.getCodigo())) {
+            if (emp.getCodigoExemplar().equals(livro.getCodigo())) {
                 emprestimosAtivos.remove(emp); 
-                emp.getExemplarLivro().setStatus(ExemplarLivro.Status.DISPONIVEL);
+                emp.tornarExemplarDisponivel();
                 emprestimos.add(emp);
                 emp.registrarDevolucao(); //pega a data
                 System.out.println("Devolução realizada com sucesso!");
