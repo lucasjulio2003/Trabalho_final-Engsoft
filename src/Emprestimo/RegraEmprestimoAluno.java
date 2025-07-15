@@ -1,11 +1,7 @@
 package Emprestimo;
 
-import Livro.ExemplarLivro;
-import java.util.List;
-
 import Livro.Livro;
 import Sistema.GerenciadorMensagem;
-import Sistema.Repositorio;
 import Usuario.Usuario;
 
 public class RegraEmprestimoAluno implements IRegraEmprestimo{
@@ -38,6 +34,7 @@ public class RegraEmprestimoAluno implements IRegraEmprestimo{
         // 5) se qtdReservas >= qtdDisponiveis, só permite se o usuário tiver reserva  int qtdReservas = livro.getReservas().size();
         if (!livro.reservasEexemplaresAdequados(usuario)) {
             GerenciadorMensagem.falhaReservasEquantidadesDisponiveis(livro);
+            return false;
         }
 
         // 6) O usuário não pode ter nenhum empréstimo em andamento de um exemplar desse mesmo livro

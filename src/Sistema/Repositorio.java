@@ -27,11 +27,11 @@ public class Repositorio {
     public Usuario buscarUsuarioPorCodigo(String codigo){
         for (Usuario usuario: this.usuarios){
             if (usuario.getId().equals(codigo)){
-                System.out.println("Usuario encontrado: " + usuario.getNome());
-                System.out.println("ID: " + usuario.getId());
+                //System.out.println("Usuario encontrado: " + usuario.getNome());
+                //System.out.println("ID: " + usuario.getId());
                 return usuario;
             }
-            System.out.println("Usuario não encontrado com o ID: " + codigo);
+            //System.out.println("Usuario não encontrado com o ID: " + codigo);
         }
 
         return null;
@@ -49,9 +49,9 @@ public class Repositorio {
     }
     public void addUsuario(Usuario novoUsuario){
         usuarios.add(novoUsuario);
-        System.out.println("Usuario adicionado: " + novoUsuario.getNome()); 
-        System.out.println("ID: " + novoUsuario.getId());
-        System.out.println(usuarios);
+        //System.out.println("Usuario adicionado: " + novoUsuario.getNome()); 
+        //System.out.println("ID: " + novoUsuario.getId());
+        //System.out.println(usuarios);
     }
     public void addLivro(Livro novoLivro){
         livros.add(novoLivro);
@@ -62,5 +62,12 @@ public class Repositorio {
                 "usuarios=" + usuarios +
                 ", livros=" + livros +
                 '}';
+    }
+    public String obterReservas(Usuario usuario){
+        StringBuilder sb = new StringBuilder();
+        for (Livro livro : livros) {
+            sb.append(livro.consultarReservas(usuario));
+        }
+        return sb.toString();
     }
 }

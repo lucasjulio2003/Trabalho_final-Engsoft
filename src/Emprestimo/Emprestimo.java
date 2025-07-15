@@ -1,7 +1,6 @@
 package Emprestimo;
 import Livro.ExemplarLivro;
 import Usuario.Usuario;
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Emprestimo {
@@ -13,23 +12,23 @@ public class Emprestimo {
     private LocalDate dataDevolucaoReal;
     
 
-    public Emprestimo(String tituloLivro, LocalDate dataEmprestimo, LocalDate dataDevolucao, ExemplarLivro exemplarLivro){
+    public Emprestimo(String tituloLivro, LocalDate dataDevolucao, ExemplarLivro exemplarLivro){
         this.tituloLivro = tituloLivro;
-        this.dataEmprestimo = dataEmprestimo;
+        this.dataEmprestimo = LocalDate.now();
         this.dataDevolucao = dataDevolucao;
         this.exemplarLivro = exemplarLivro;
         this.dataDevolucaoReal = null;
     }
-    public static Emprestimo criarNovoEmprestimo(String tituloLivro, ExemplarLivro exemplar) {
-        Emprestimo emprestimo = new Emprestimo(
-            tituloLivro, 
-            LocalDate.now(), 
-            LocalDate.now().plusDays(14), 
-            exemplar
-        );
-        emprestimo.setDataEmprestimo(LocalDate.now());
-        return emprestimo;
-    }
+    // public static Emprestimo criarNovoEmprestimo(String tituloLivro, ExemplarLivro exemplar) {
+    //     Emprestimo emprestimo = new Emprestimo(
+    //         tituloLivro, 
+    //         LocalDate.now(), 
+    //         LocalDate.now().plusDays(14), 
+    //         exemplar
+    //     );
+    //     emprestimo.setDataEmprestimo(LocalDate.now());
+    //     return emprestimo;
+    // }
 
     public String getTituloLivro() {
         return tituloLivro;
@@ -70,6 +69,16 @@ public class Emprestimo {
     public LocalDate getDataDevolucaoReal() {
         return dataDevolucaoReal;
     }
+    public String consultarEmprestimos() {
+        return "Emprestimo{" +
+               "tituloLivro='" + tituloLivro + '\'' +
+               ", dataEmprestimo=" + dataEmprestimo +
+               ", dataDevolucao=" + dataDevolucao +
+               ", statusEmprestimo= " + (dataDevolucaoReal != null ? "Devolvido" : "Ativo") +
+               ", exemplarLivro= " + (exemplarLivro != null ? exemplarLivro.getCodigo() : "N/A") +
+                (dataDevolucaoReal != null ? "dataDevolucaoReal= " + dataDevolucaoReal : "") +
+               '}';
+    }
     //pra debug
     @Override
     public String toString() {
@@ -78,7 +87,9 @@ public class Emprestimo {
                ", exemplar=" + (exemplarLivro != null ? exemplarLivro.getCodigo() : "N/A") +
                ", dataEmprestimo=" + dataEmprestimo +
                ", dataDevolucaoPrevista=" + dataDevolucao +
-               ", dataDevolucaoReal=" + (dataDevolucaoReal != null ? dataDevolucaoReal : "PENDENTE") +
                '}';
+    }
+    public Usuario getUsuario() {
+        return usuario;
     }
 }

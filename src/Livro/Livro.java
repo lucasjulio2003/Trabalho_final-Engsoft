@@ -1,21 +1,21 @@
 package Livro;
-import java.util.List;
-
 import Emprestimo.Emprestimo;
 import Emprestimo.Reserva;
-import Sistema.GerenciadorMensagem;
+import Notificacoes.IObserver;
+import Notificacoes.ISubject;
 import Usuario.Usuario;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Livro {
+public class Livro implements ISubject{
     private String codigo;
     private String titulo;
     private String editora;
     private List<String> autores;
     private String edicao;
     private String anoPublicacao;
+    private List<IObserver> observadores = new ArrayList<>();
 
     private List<ExemplarLivro> exemplares;
 
@@ -30,6 +30,17 @@ public class Livro {
         this.anoPublicacao = anoPublicacao;
         this.exemplares = new ArrayList<ExemplarLivro>();
         this.reservas = new ArrayList<>();
+        
+    }
+
+    public String consultarReservas(Usuario usuario){
+        StringBuilder sb = new StringBuilder();
+        for (Reserva reserva : reservas) {
+            if (reserva.getUsuario().equals(usuario)) {
+                sb.append(reserva.toString()).append("\n");
+            }
+        }
+        return sb.toString();
     }
 
     public ExemplarLivro buscarExemplarDisponivel() {
@@ -55,6 +66,7 @@ public class Livro {
         return (qtdReservas < qtdExemplaresDisponiveis || temReserva);
         
     }
+    
 
     public void reservarLivro(LocalDate dataSolicitacao, Usuario usuario, Livro livro) {
         Reserva reserva = new Reserva(dataSolicitacao, usuario, livro);
@@ -76,6 +88,9 @@ public class Livro {
 
     public void adicionarReserva(Reserva r) {
         reservas.add(r);
+        if(reservas.size() >= 2) {
+            notificarObservadores();
+        }
     }
 
     public List<Reserva> getReservas() {
@@ -138,17 +153,55 @@ public class Livro {
     public void addExemplar(ExemplarLivro novoExemplar){
         exemplares.add(novoExemplar);
     }
+    
+
+    @Override
+    public void adicionarObservador(IObserver observador) {
+        observadores.add(observador);
+        System.out.println("Observador adicionado: " + observador);
+    }
+
+    @Override
+    public void removerObservador(IObserver observador) {
+        observadores.remove(observador);
+        System.out.println("Observador removido: " + observador);
+    }
+
+    @Override
+    public void notificarObservadores() {
+        for (IObserver observador : observadores) {
+
+            observador.update("O livro " + titulo + " atingiu mais de 2 reservas simultaneas.");
+            // Aqui você pode adicionar mais detalhes sobre a notificação, se necessário
+        }
+        System.out.println("Todos os observadores foram notificados.");
+    }
+    public String retornaInfoReservas() {
+        StringBuilder info = new StringBuilder();
+        for (Reserva reserva : reservas) {
+            info.append("Usuário: ").append(reserva.getUsuario().getNome());
+        }
+        return info.toString();
+    }
+    public String listaExemplares() {
+        StringBuilder sb = new StringBuilder();
+        for (ExemplarLivro exemplar : exemplares) {
+            sb.append("Código: ").append(exemplar.getCodigo()).append(", Status: ").append(exemplar.getStatus()).append("\n");
+            if(exemplar.getStatus() == ExemplarLivro.Status.EMPRESTADO) {
+                sb.append("Nome usuário: ").append(exemplar.getEmprestimo().getUsuario().getNome()).append(", Data Emprestimo: ")
+                        .append(exemplar.getEmprestimo().getDataEmprestimo()).append("\n");
+            }
+        }
+        return sb.toString();
+    }
+    
     @Override
     public String toString() {
         return "Livro{" +
                 "codigo='" + codigo + '\'' +
                 ", titulo='" + titulo + '\'' +
-                ", editora='" + editora + '\'' +
-                ", autores=" + autores +
-                ", edicao='" + edicao + '\'' +
-                ", anoPublicacao='" + anoPublicacao + '\'' +
-                ", exemplares=" + exemplares +
+                ", reservas='" + retornaInfoReservas() + '\'' +
+                ", exemplares=" + listaExemplares() +
                 '}';
     }
-    
 }

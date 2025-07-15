@@ -1,10 +1,8 @@
 package Emprestimo;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 import Livro.Livro;
 import Usuario.Usuario;
+import java.time.LocalDate;
 
 public class Reserva {
     private LocalDate dataSolicitacao;
@@ -41,6 +39,12 @@ public class Reserva {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "dataSolicitacao=" + dataSolicitacao +
+                ", livro=" + livro.getTitulo() +
+                '}';
+    }
 
 }

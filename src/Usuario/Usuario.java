@@ -9,6 +9,8 @@ import Emprestimo.Reserva;
 import Livro.ExemplarLivro;
 import Livro.ExemplarLivro;
 import Livro.Livro;
+import Notificacoes.IObserver;
+import Sistema.Repositorio;
 
 public abstract class Usuario {
     private String id;
@@ -26,11 +28,13 @@ public abstract class Usuario {
     }
 
     public abstract int getLimiteEmprestimos();
+    public abstract int getPrazoDias();
+
 
     public void realizarEmprestimo(Livro livro) {
-        System.out.println("entrouaqui");
+        //System.out.println("entrouaqui");
         if (this.regraEmprestimo.verificarEmprestimo(this, livro)) {
-            System.out.println("veio pro if.");
+            //System.out.println("veio pro if.");
             
             boolean jaExiste = false;
             
@@ -39,7 +43,7 @@ public abstract class Usuario {
                 ExemplarLivro exemplarDisponivel = livro.buscarExemplarDisponivel();
                 if (exemplarDisponivel != null) {
                     exemplarDisponivel.setStatus(ExemplarLivro.Status.EMPRESTADO);
-                    Emprestimo emp = Emprestimo.criarNovoEmprestimo(livro.getTitulo(), exemplarDisponivel);
+                    Emprestimo emp = new Emprestimo(livro.getTitulo(), LocalDate.now().plusDays(getPrazoDias()), exemplarDisponivel);
                     emprestimosAtivos.add(emp);
                     System.out.println("Novo empréstimo realizado com sucesso!");
                 } else {
@@ -56,22 +60,8 @@ public abstract class Usuario {
                     }
                 }
                 
-                // Se não existe, cria novo empréstimo
-                // if (!jaExiste) {
-                //     ExemplarLivro exemplarDisponivel = livro.buscarExemplarDisponivel();
-                //     if (exemplarDisponivel != null) {
-                //         exemplarDisponivel.setStatus(ExemplarLivro.Status.EMPRESTADO);
-                //         Emprestimo emp = Emprestimo.criarNovoEmprestimo(livro.getTitulo(), exemplarDisponivel);
-                //         emprestimosAtivos.add(emp);
-                //         System.out.println("✅ Novo empréstimo realizado com sucesso!");
-                //     } else {
-                //         System.out.println("❌ Nenhum exemplar disponível.");
-                //     }
-                // }
             }
-        } else {
-            System.out.println("Empréstimo negado pelas regras.");
-        }
+        } 
     }
                     
 
@@ -103,7 +93,6 @@ public abstract class Usuario {
         }
     }
 
-    
 
     public void setDevedor(boolean isDevedor) {
         this.isDevedor = isDevedor;
@@ -136,15 +125,26 @@ public abstract class Usuario {
     public List<Emprestimo> getEmprestimosAtivos() {
         return emprestimosAtivos;
     }
+    
+    public String consultarUsuario() {
+        for(Emprestimo emp : emprestimosAtivos) {
+            System.out.println(emp.consultarEmprestimos());
+        }
+       Repositorio repo = Repositorio.getRepositorio();
+       return repo.obterReservas(this);
+    }
+    
     @Override
     public String toString() {
         return "Usuario{" +
                 "id='" + id + '\'' +
                 ", nome='" + nome + '\'' +
                 ", isDevedor=" + isDevedor +
-                ", emprestimos=" + emprestimosAtivos +
+                ", emprestimos ativos=" + emprestimosAtivos +
+                ", emprestimos passados=" + emprestimos +
                 '}';
     }
+    
 }
 
 

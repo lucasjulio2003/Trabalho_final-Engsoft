@@ -17,6 +17,10 @@
 			comandos.put("emp", new ComandoEmprestar());
 			comandos.put("res", new ComandoReservar());
 			comandos.put("dev", new ComandoDevolver());
+			comandos.put("liv", new ConsultarLivro());
+			comandos.put("usu", new ConsultarUsuario());
+			comandos.put("ntf", new NotificacoesRecebidas());
+			comandos.put("obs", new RegistraObservador());
 		}
 		
 		public void executarComando(String strComando, CarregadorParametros parametros) {
@@ -37,17 +41,20 @@
 				//System.out.println("Comando inválido. Use o formato: comando parametro1 parametro2");
 
 				String comando = parametros[0];
-				System.out.println("Parametros:" + parametros[1] + " " + parametros[2]);
+				
 
-				if (comando == "sai"){
+				if (comando.equals("sai")){
 					System.exit(0);
 				}
-
-				CarregadorParametros carregadorParametros = new CarregadorParametros(parametros[1], parametros[2]);
 				
-				System.out.println(carregadorParametros);
+				if (parametros.length == 3) {
+					CarregadorParametros carregadorParametros = new CarregadorParametros(parametros[1],parametros[2]);
+					this.executarComando(comando, carregadorParametros);
+				}else{
+					CarregadorParametros carregadorParametros = new CarregadorParametros(parametros[1]);
+					this.executarComando(comando, carregadorParametros);
+				}
 				
-				this.executarComando(comando, carregadorParametros);
 
 				//scanner.close();
 			}

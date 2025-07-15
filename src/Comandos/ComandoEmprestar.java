@@ -22,7 +22,7 @@ public class ComandoEmprestar implements Comando {
         System.out.println("id encontrado");
         System.out.println("Usuario: " + usuario);
 
-        System.out.println("chamando comando realizar emrpestmo");
+        //System.out.println("chamando comando realizar emrpestmo");
         usuario.realizarEmprestimo(livro);
         
         
