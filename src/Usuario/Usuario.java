@@ -36,33 +36,14 @@ public abstract class Usuario {
         if (this.regraEmprestimo.verificarEmprestimo(this, livro)) {
             //System.out.println("veio pro if.");
             
-            boolean jaExiste = false;
-            
-            if (emprestimosAtivos.isEmpty()) {
-                System.out.println("Lista vazia, criando primeiro empréstimo.");
-                ExemplarLivro exemplarDisponivel = livro.buscarExemplarDisponivel();
-                if (exemplarDisponivel != null) {
-                    exemplarDisponivel.setStatus(ExemplarLivro.Status.EMPRESTADO);
-                    Emprestimo emp = new Emprestimo(livro.getTitulo(), LocalDate.now().plusDays(getPrazoDias()), exemplarDisponivel);
-                    emprestimosAtivos.add(emp);
-                    System.out.println("Novo empréstimo realizado com sucesso!");
-                } else {
-                    System.out.println("Nenhum exemplar disponível.");
-                }
-            } else {
-                // Verifica se já existe empréstimo para este livro
-                for (Emprestimo empAtivo : emprestimosAtivos) {
-                    System.out.println("veio pro for tem emprestimo ativo.");
-                    if (empAtivo.getCodigoExemplar().equals(livro.getCodigo())) {
-                        System.out.println("Empréstimo já existe para este livro.");
-                        jaExiste = true;
-                        break;
-                    }
-                }
-                
+
+            ExemplarLivro exemplarDisponivel = livro.buscarExemplarDisponivel();
+            exemplarDisponivel.setStatus(ExemplarLivro.Status.EMPRESTADO);
+            Emprestimo emp = new Emprestimo(livro.getTitulo(), LocalDate.now().plusDays(getPrazoDias()), exemplarDisponivel);
+            emprestimosAtivos.add(emp);
+            System.out.println("Novo empréstimo realizado com sucesso!");                
             }
         } 
-    }
                     
 
     public IRegraEmprestimo getRegraEmprestimo(){

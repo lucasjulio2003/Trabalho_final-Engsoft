@@ -38,10 +38,12 @@ public class RegraEmprestimoAluno implements IRegraEmprestimo{
         }
 
         // 6) O usuário não pode ter nenhum empréstimo em andamento de um exemplar desse mesmo livro
-        if(!usuario.getEmprestimosAtivos().isEmpty()) {
-            GerenciadorMensagem.falhaEmprestimoAtivo(usuario);
-            return false;
-        }
+        for (Emprestimo empAtivo : usuario.getEmprestimosAtivos()) {
+            if (empAtivo.getCodigoExemplar().equals(livro.getCodigo())) {
+                System.out.println("Empréstimo já existe para este livro.");
+                return false;
+            }
+            }
 
         // Se passou em todas as etapas, permite o empréstimo
         return true;
